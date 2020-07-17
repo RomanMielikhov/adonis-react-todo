@@ -11,10 +11,10 @@ class ProjectController {
 
   async create({ auth, request }) {
     const user = await auth.getUser();
-    const { titel } = request.all();
+    const { title } = request.all();
     const project = new Project();
     project.fill({
-      titel,
+      title,
     });
     await user.projects().save(project);
     return project;
@@ -26,6 +26,16 @@ class ProjectController {
     const project = await Project.find(id);
     AuthorizationService.verifyPromission(project, user);
     await project.delete();
+    return project;
+  }
+
+  async update({ auth, request, params }) {
+    const user = await auth.getUser();
+    const { id } = params;
+    const project = await Project.find(id);
+    AuthorizationService.verifyPromission(project, user);
+    project.merge(request.only('title'));
+    await project.save();
     return project;
   }
 }
