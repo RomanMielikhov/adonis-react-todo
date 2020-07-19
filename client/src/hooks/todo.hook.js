@@ -20,12 +20,12 @@ export const useToDo = () => {
   );
 
   const updateToDo = useCallback(
-    async (id, description, completed) => {
+    async (id, completed) => {
       try {
         await request(
           `api/tasks/${id}`,
-          'PUTCH',
-          { completed, description },
+          'PATCH',
+          { completed },
           {
             Authorization: `Bearer ${auth.token}`,
           }
@@ -36,12 +36,12 @@ export const useToDo = () => {
   );
 
   const addToDo = useCallback(
-    async (description, completed) => {
+    async (description) => {
       try {
         await request(
           `api/tasks`,
           'POST',
-          { description, completed },
+          { description },
           {
             Authorization: `Bearer ${auth.token}`,
           }

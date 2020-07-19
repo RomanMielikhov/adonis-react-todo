@@ -7,7 +7,7 @@ export const Routes = (isAuthentication) => {
   if (isAuthentication) {
     return (
       <Switch>
-        <Route path="/">
+        <Route path="/" exact>
           <ToDoList />
         </Route>
         <Redirect to="/" />
@@ -16,7 +16,7 @@ export const Routes = (isAuthentication) => {
   }
   return (
     <Switch>
-      <Route path="/auth">
+      <Route path="/auth" exact>
         <Authentication />
       </Route>
       <Redirect to="/auth" />

@@ -55,7 +55,7 @@ export const Authentication = () => {
                 />
                 <button
                   type="button"
-                  className="m-2 btn btn-primary float-right"
+                  className="m-2 btn btn-outline-primary float-right"
                   disabled={loading}
                   onClick={loginHendler}
                 >
@@ -63,7 +63,7 @@ export const Authentication = () => {
                 </button>
                 <button
                   type="button"
-                  className="m-2 btn btn-primary float-right"
+                  className="m-2 btn btn-outline-primary float-right"
                   onClick={registerHendler}
                   disabled={loading}
                 >
