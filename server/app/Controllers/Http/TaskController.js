@@ -1,29 +1,22 @@
 'use strict';
 
-const Project = use('App/Models/Project');
 const Task = use('App/Models/Task');
 const AuthorizationService = use('App/Services/AuthorizationService');
 
 class TaskController {
-  async index({ auth, request, params }) {
+  async index({ auth }) {
     const user = await auth.getUser();
-    const { id } = params;
-    const project = await Project.find(id);
-    AuthorizationService.verifyPromission(project, user);
-    return await project.tasks().fetch();
+    return await user.tasks().fetch();
   }
 
-  async create({ auth, request, params }) {
+  async create({ auth, request }) {
     const user = await auth.getUser();
     const { description } = request.all();
-    const { id } = params;
-    const project = await Project.find(id);
-    AuthorizationService.verifyPromission(project, user);
     const task = new Task();
     task.fill({
       description,
     });
-    await project.tasks().save(task);
+    await user.tasks().save(task);
     return task;
   }
 
@@ -31,8 +24,7 @@ class TaskController {
     const user = await auth.getUser();
     const { id } = params;
     const task = await Task.find(id);
-    const project = await task.project().fetch();
-    AuthorizationService.verifyPromission(project, user);
+    AuthorizationService.verifyPromission(task, user);
     await task.delete();
     return task;
   }
@@ -41,8 +33,7 @@ class TaskController {
     const user = await auth.getUser();
     const { id } = params;
     const task = await Task.find(id);
-    const project = await task.project().fetch();
-    AuthorizationService.verifyPromission(project, user);
+    AuthorizationService.verifyPromission(task, user);
     task.merge(request.only(['description', 'completed']));
     await task.save();
     return task;

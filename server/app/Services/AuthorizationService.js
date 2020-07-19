@@ -1,15 +1,11 @@
-const InvalidAccessException = use('App/Exceptions/InvalidAccessException');
 const ResourseNotExistException = use(
   'App/Exceptions/ResourseNotExistException'
 );
 
 class AuthorizationService {
-  verifyPromission(resource, user) {
-    if (!resource) {
+  verifyPromission(respounse, user) {
+    if (!respounse) {
       throw new ResourseNotExistException();
-    }
-    if (resource.user_id !== user.id) {
-      throw new InvalidAccessException();
     }
   }
 }
