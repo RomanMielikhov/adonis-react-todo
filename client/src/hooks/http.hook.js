@@ -20,6 +20,7 @@ export const useHttp = () => {
         setLoading(false);
         return data;
       } catch (error) {
+        console.log(error);
         setLoading(false);
         setError(error.message);
         throw error;
@@ -28,7 +29,5 @@ export const useHttp = () => {
     []
   );
 
-  const clearError = () => setError(null);
-
-  return { loading, request, error, clearError };
+  return { loading, request, error };
 };

@@ -30,7 +30,9 @@ export const useToDo = () => {
             Authorization: `Bearer ${auth.token}`,
           }
         );
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     },
     [auth.token, request]
   );
@@ -46,7 +48,9 @@ export const useToDo = () => {
             Authorization: `Bearer ${auth.token}`,
           }
         );
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     },
     [auth.token, request]
   );
@@ -57,7 +61,9 @@ export const useToDo = () => {
         Authorization: `Bearer ${auth.token}`,
       });
       return data;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, [auth.token, request]);
 
   return { deleteToDo, updateToDo, addToDo, getToDo };
