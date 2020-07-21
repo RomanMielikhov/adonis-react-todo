@@ -4,4 +4,5 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3333
-CMD ["node", "server.js",]
+RUN npm i @adonisjs/cli
+CMD ["npm", "start"]
