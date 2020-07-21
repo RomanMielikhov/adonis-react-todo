@@ -1,11 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHttp } from '../hooks/http.hook';
 import { AuthContext } from '../context/AuthContext';
 
 export const Authentication = () => {
   const [form, setForm] = useState({ email: '', password: '' });
-  const { loading, request } = useHttp();
+  const { loading, request, error, clearError } = useHttp();
   const auth = useContext(AuthContext);
+  const [err, setErr] = useState('');
+
+  useEffect(() => {
+    setErr(error);
+    setTimeout(function () {
+      clearError();
+    }, 10000);
+  }, [error, clearError]);
 
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -27,6 +35,7 @@ export const Authentication = () => {
 
   return (
     <div>
+      {err && <div className="alert alert-danger err">{err}</div>}
       <div className="container mt-5">
         <div className="col-8 offset-2">
           <div className="row">

@@ -15,19 +15,21 @@ export const useHttp = () => {
         const response = await fetch(url, { method, body, headers });
         const data = await response.json();
         if (!response.ok) {
-          throw new Error(data.message || 'error');
+          throw new Error(data.message || 'Error');
         }
         setLoading(false);
         return data;
       } catch (error) {
-        console.log(error);
         setLoading(false);
         setError(error.message);
+        console.log(error.message);
         throw error;
       }
     },
     []
   );
 
-  return { loading, request, error };
+  const clearError = useCallback(() => setError(null), []);
+
+  return { loading, request, error, clearError };
 };

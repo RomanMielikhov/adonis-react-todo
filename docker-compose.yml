@@ -20,9 +20,9 @@ services:
     image: postgres:12
     restart: always
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Roman
+      POSTGRES_DB: Roman
+      POSTGRES_USER: Roman
     ports:
       - '5432:5432'
     volumes:
